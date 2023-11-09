@@ -1,0 +1,10 @@
+.dashboard{
+    width: 100%;
+    padding: 22px 32px 0px 32px;
+
+    &_block {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 22px;
+    }
+}
