@@ -11,6 +11,7 @@
     &_header {
         display: flex;
         justify-content: space-between;
+        margin-bottom: 20px;
 
         &_title {
             color: var(--grey-grey-800, #383E49);
@@ -39,7 +40,37 @@
     &_info {
 
         &_table {
+            width: 100%;
 
+            &_tr {
+                display: flex;
+                justify-content: space-between;
+                color: var(--grey-grey-600, #5D6679);
+                border-top: 1px solid #F0F1F3;
+
+                /* Body 2/Medium */
+                font-family: Inter;
+                font-size: 14px;
+                font-style: normal;
+                font-weight: 500;
+                line-height: 20px; /* 142.857% */
+                font-family: 'Open Sans', sans-serif;
+            }
+
+            &_th {
+                display: flex;
+                text-align: center;
+                color: var(--grey-grey-600, #5D6679);
+                padding: 10px;
+
+                /* Body 2/Medium */
+                font-family: Inter;
+                font-size: 14px;
+                font-style: normal;
+                font-weight: 500;
+                line-height: 20px; /* 142.857% */
+                font-family: 'Open Sans', sans-serif;
+            }
         }
     }
 

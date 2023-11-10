@@ -3,6 +3,7 @@ import authRouter from "../../modules/Auth/router";
 import App from "../App";
 import Dashobard from "../../pages/Dashboard";
 import RouteListenerLayout from "../../components/RouteListenerLayout";
+import Inventory from "../../pages/Inventory/Index";
 
 const router = createBrowserRouter([
     {
@@ -12,6 +13,10 @@ const router = createBrowserRouter([
     {
         path: '/dashboard',
         element: <RouteListenerLayout><Dashobard /></RouteListenerLayout>
+    },
+    {
+        path: '/inventory',
+        element: <RouteListenerLayout><Inventory /></RouteListenerLayout>
     },
     ...authRouter
 ])

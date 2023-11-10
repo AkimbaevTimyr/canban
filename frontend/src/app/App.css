@@ -105,3 +105,34 @@ a {
 .text-center {
   text-align: center;
 }
+
+
+.blue{
+  color: var(--primary-primary-500, #1570EF);
+}
+
+.yellow {
+  color: #E19133;
+}
+
+.pink {
+  color: #845EBC;
+}
+
+.carrot {
+  color: var(--error-error-400, #F36960);
+}
+
+
+.flex {
+  display: flex;
+  justify-content: space-between;
+}
+
+.green {
+  color: var(--success-success-600, #10A760);
+}
+
+.red {
+  color: var(--error-error-600, #DA3E33);
+}

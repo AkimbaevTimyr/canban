@@ -13,9 +13,32 @@ function TopSellingStock() {
             </div>
         </div>
         <div className='top_stock_info'>
-            <div className="top_stock_info_table">
-                
-            </div>
+            <table className="top_stock_info_table">
+                <tr className='top_stock_info_table_tr'>
+                    <th className='top_stock_info_table_th'>Name</th>
+                    <th className='top_stock_info_table_th'>Sold Quantity</th>
+                    <th className='top_stock_info_table_th'>Remaining Quantity</th>
+                    <th className='top_stock_info_table_th'>Price</th>
+                </tr>
+                <tr className='top_stock_info_table_tr'>
+                    <th className='top_stock_info_table_th'>Surf Excel</th>
+                    <th className='top_stock_info_table_th'>30</th>
+                    <th className='top_stock_info_table_th'>12</th>
+                    <th className='top_stock_info_table_th'>₹ 100</th>
+                </tr>
+                <tr className='top_stock_info_table_tr'>
+                    <th className='top_stock_info_table_th'>Surf Excel</th>
+                    <th className='top_stock_info_table_th'>30</th>
+                    <th className='top_stock_info_table_th'>12</th>
+                    <th className='top_stock_info_table_th'>₹ 100</th>
+                </tr>
+                <tr className='top_stock_info_table_tr'>
+                    <th className='top_stock_info_table_th'>Surf Excel</th>
+                    <th className='top_stock_info_table_th'>30</th>
+                    <th className='top_stock_info_table_th'>12</th>
+                    <th className='top_stock_info_table_th'>₹ 100</th>
+                </tr>
+            </table>  
         </div>
     </div>
   )
