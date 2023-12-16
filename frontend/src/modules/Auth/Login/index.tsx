@@ -2,8 +2,35 @@ import '../style/style.scss';
 import logo from '../../../assets/images/Logo.svg';
 import main from '../../../assets/images/LogoMain.svg';
 import google from '../../../assets/images/Google.svg';
+import { useState } from 'react';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import { realpathSync } from 'fs';
+import api from '../../../app/api/api';
 
 function Login() {
+    const [email, setEmail] = useState<string>('');
+    const [password, setPassword] = useState<string>('');
+    let navigate = useNavigate();
+
+
+    const handleSumbit = async (e: any) => {
+        e.preventDefault();
+        try{
+            // const csrf = await api.get('/sanctum/csrf-cookie')
+            const response = await api.post('/api/login', {
+                email,
+                password
+            });
+            console.log(response.data);
+            navigate('/');
+        } catch (error: any) {
+            const responseData = error.response ? error.response.data : null;
+            const errorMessage = responseData ? responseData.message : 'Something went wrong';
+            alert(errorMessage);
+        }
+    }
+
   return (
     <div className='wrapper'>
         <div className='login'>
@@ -17,13 +44,26 @@ function Login() {
                     <p className='login_right_header_desc'>Welcome back! Please enter your details..</p>
                 </div>
                 <div className='login_right_form'>
-                    <form>
+                    <form onSubmit={handleSumbit}>
                         <div className='login_right_form_fields'>
                             <label htmlFor='email'  className='input_label'>Email*</label>
-                            <input type='email' id='email' className='form_input' placeholder='Enter your email' />
+                            <input 
+                                onChange={(e) => setEmail(e.target.value)}
+                                type='email' 
+                                id='email' 
+                                className='form_input' 
+                                placeholder='Enter your email' 
+                                required
+                            />
 
                             <label htmlFor='password'  className='input_label'>Password*</label>
-                            <input type='password' id='password' className='form_input' placeholder='Enter your password' />
+                            <input 
+                                onChange={(e) => setPassword(e.target.value)}
+                                type='password' 
+                                id='password' 
+                                className='form_input' 
+                                placeholder='Enter your password' 
+                            />
                             <button className='form_button' type='submit'>Sign in</button>
                         </div>
                         <div className='login_right_form_password_options'>
