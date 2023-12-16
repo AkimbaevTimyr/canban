@@ -11,7 +11,12 @@ class CategoriesController extends Controller
 {
     public function all()
     {
-        return Categories::all()->paginate();
+        $categories = Categories::getUserCategories();
+
+        return response()->json([
+            'count' => count($categories),
+            'data' => $categories
+        ]);
     }
 
     public function store(Request $request): JsonResponse

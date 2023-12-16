@@ -2,22 +2,32 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Categories;
-use App\Models\Products as ModelsProducts;
+use App\Models\Products;
 use App\Models\UserProducts;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 
-class Products extends Controller
+
+// {
+//     "name": "Iphone 10",
+//     "category_id": 3,
+//     "buy_price": 199999.000,
+//     "quantity": 5,
+//     "threshold": 2
+// }
+
+class ProductsController extends Controller
 {
-    public function all()
+    public function all(Request $request)
     {
-        $user_id = Auth::user()->id;
-        $products = ModelsProducts::join('user_products', 'user_products.product_id', '=', 'products.id')
-                        ->where('user_products.user_id', '=', $user_id)
-                        ->select('products.*')
-                        ->paginate();
+        $products = Products::getUserProducts($request->category_id);
+        return $products;
+    }
+
+    public function lowStocks(Request $request)
+    {
+        $products = Products::getLowStocks();
         return $products;
     }
 
@@ -33,7 +43,7 @@ class Products extends Controller
             'threshold' => ['required', 'integer']
         ]);
 
-        $product = ModelsProducts::create([
+        $product = Products::create([
             'name' => $request->name,
             'category_id' => $request->category_id,
             'buy_price' => $request->buy_price,

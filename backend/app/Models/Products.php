@@ -4,6 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+
 
 class Products extends Model
 {
@@ -20,4 +23,27 @@ class Products extends Model
         "created_at",
         "updated_at"
     ];
+
+    public static function getUserProducts($id)
+    {
+        $user_id = Auth::user()->id;
+
+        return self::join('user_products', 'user_products.product_id', '=', 'products.id')
+                    ->where('user_products.user_id', '=', $user_id)
+                    ->where('products.category_id', '=', $id)
+                    ->select('products.*')
+                    ->paginate();
+    }
+
+    public static function getLowStocks()
+    {
+        $user_id = Auth::user()->id;
+        return self::join('user_products', 'user_products.product_id', '=', 'products.id')
+                        ->where('user_products.user_id', '=', $user_id)
+                        ->select(
+                                    DB::raw('count(case when products.quantity <= 10 then 1 end) as low_stock'),
+                                    DB::raw('count(case when products.quantity = 0 then 1 end) as not_in_stock',)
+                                )   
+                        ->get();
+    }
 }

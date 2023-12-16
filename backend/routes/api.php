@@ -3,7 +3,8 @@
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\CategoriesController;
-use App\Http\Controllers\Products;
+use App\Http\Controllers\ProductsController;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -24,16 +25,13 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 Route::middleware(['auth:sanctum'])->group(function () {
-    Route::get('/orders', function() {
-        return 'orders';
-    });
-
     Route::post('/category-create', [CategoriesController::class, 'store']);
     Route::delete('/category-delete', [CategoriesController::class, 'destroy']);
     Route::get('/categories-all', [CategoriesController::class, 'all']);
 
-    Route::get('/products-all', [Products::class, 'all']);
-    Route::post('/product-create', [Products::class, 'store']);
+    Route::get('/products-all', [ProductsController::class, 'all']);
+    Route::post('/product-create', [ProductsController::class, 'store']);
+    Route::get('/products-low-stocks', [ProductsController::class, 'lowStocks']);
 });
 
 
