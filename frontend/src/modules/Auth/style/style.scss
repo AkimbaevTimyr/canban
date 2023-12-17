@@ -141,3 +141,14 @@
 
 }
 
+
+@media (max-width: 950px) {
+    .login {
+        flex-direction: column;
+        margin-top: 30px;
+        
+        &_left{
+            display: none;
+        }
+    }
+}
