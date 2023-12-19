@@ -8,3 +8,29 @@
         margin-bottom: 22px;
     }
 }
+
+@media (max-width: 1366px) {
+    .dashboard {
+
+        &_block {
+            display: block;
+        }
+    }
+
+    .overview {
+        margin-bottom: 20px;
+    }
+
+   
+}
+
+@media (max-width: 768px) {
+    
+    .dashboard{
+        padding: 22px 0px;
+
+        &_block{
+            display: block;
+        }
+    }
+}

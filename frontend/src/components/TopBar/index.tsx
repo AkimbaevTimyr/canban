@@ -58,9 +58,9 @@ function TopBar() {
             }
             
         </div>
-        <div className='topbar_search'>
+        {/* <div className='topbar_search'>
             <input className="topbar_search_input" placeholder='Search product, supplier, order'/>
-        </div>
+        </div> */}
         <div className='topbar_account'>
             <ul className='topbar_account_list'>
                 <li className='topbar_account_list_item'>

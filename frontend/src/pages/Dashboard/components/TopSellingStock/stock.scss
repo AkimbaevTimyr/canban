@@ -73,7 +73,12 @@
             }
         }
     }
+}
 
+@media (max-width: 1366px) {
+    .top_stock {
+        margin-bottom: 20px;
+    }
 }
 
 @media (max-width: 850px){
@@ -93,7 +98,8 @@
 
 @media (max-width: 768px) {
     .top_stock {
-
+        width: auto;
+        max-width: none;
         &_info{
 
             &_table {

@@ -183,5 +183,33 @@
 @media (max-width: 768px) {
     .inventory {
         position: relative;
+        padding: 32px 0px;
+
+        
+    }
+}
+
+
+@media (max-width: 455px) {
+    .inventory {
+        &_products {
+
+            &_body {
+                overflow: auto;
+            }
+
+            &_header {
+                display: block;
+                
+                &_title {
+                    margin-bottom: 10px;
+                }
+
+                &_buttons {
+                    display: flex;
+                    justify-content: flex-start;
+                }
+            }
+        }
     }
 }

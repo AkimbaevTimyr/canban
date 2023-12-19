@@ -71,3 +71,32 @@
         }
     }
 }
+
+
+@media (max-width: 960px) {
+    .overview{
+        width: auto;
+        max-width: auto;
+
+        &_info{
+
+            &_list {
+                max-width: 600px;
+                flex-wrap: wrap;
+
+                &_item {
+                    margin-bottom: 20px;
+                    border-right: none;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .overview {
+        max-width: none;
+        margin-right: 0px;
+    }
+    
+}

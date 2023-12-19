@@ -46,3 +46,18 @@
 
     }
 }
+
+@media (max-width: 1366px) {
+    .sales {
+        margin-bottom: 20px;
+    }
+}
+
+
+@media (max-width: 768px) {
+    .sales {
+        width: auto;
+        max-width: none;
+        margin-right: 0px;
+    }
+}
