@@ -163,3 +163,25 @@
         }
     }
 }
+
+
+@media (max-width: 1000px) {
+    .inventory {
+        &_overall {
+
+            &_info {
+
+                &_list {
+                    max-width: 550px;
+                    flex-wrap: wrap;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .inventory {
+        position: relative;
+    }
+}

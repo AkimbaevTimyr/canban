@@ -16,6 +16,19 @@ a {
   width: calc(100% - 345px);
 }
 
+@media (max-width: 1000px){
+  .app_body {
+    width: calc(100% - 265px);
+  }
+}
+
+@media (max-width: 768px){
+  .app_body {
+    width: 100%
+  }
+}
+
+
 .form_input{
   width: auto;
   border-radius: 8px;

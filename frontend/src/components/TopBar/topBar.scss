@@ -42,4 +42,40 @@
         }
     }
 
+    &_dropdown {
+        margin-top: 5px;
+        background-color: white;
+
+        &_list {
+            position: relative;
+            z-index: 1;
+            padding: 10px;
+            list-style-type: none;
+            background-color: white;
+            &_item {
+                margin-bottom: 5px;
+                text-decoration: none;
+
+                a {
+                    color: var(--grey-grey-600, #5D6679);
+                    
+                    &:hover {
+                        color: var(--primary-primary-500, #1570EF);
+                        scale: 1.05;
+                    }
+                }
+            }
+        }
+    }
+
+}
+
+.navbar_button {
+    display: none;
+}
+
+@media (max-width: 768px){
+    .navbar_button {
+        display: block;
+    }
 }
