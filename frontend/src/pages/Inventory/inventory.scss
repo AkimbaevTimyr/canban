@@ -208,8 +208,21 @@
                 &_buttons {
                     display: flex;
                     justify-content: flex-start;
+
+                    &_add {
+                        font-size: 11px;
+                    }
+
+                    &_download {
+                        font-size: 11px;
+                    }
+
+                    &_filters {
+                        font-size: 11px;
+                    }
                 }
             }
         }
     }
 }
+

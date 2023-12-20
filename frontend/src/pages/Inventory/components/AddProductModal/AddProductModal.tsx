@@ -1,6 +1,6 @@
 import React, {FC} from 'react'
 import Modal from 'react-modal';
-import './modal.scss';
+import '../modal.scss';
 
 
 interface AddProductModalProps {

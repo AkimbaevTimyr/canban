@@ -75,6 +75,33 @@
 
 @media (max-width: 465px) {
     .summary {
-        width: auto
+        width: auto;
+        
+        &_info {
+
+            &_list {
+                flex-wrap: wrap;
+
+                &_item{
+                    padding-right: 0px;
+                    border-right: none;
+                }
+            }
+        }
+    };
+}
+
+@media (max-widht: 380px) {
+    .summary {
+        
+        &_info {
+
+            &_list {
+
+                &_item{
+                    margin-bottom: 40px
+                }
+            }
+        }
     };
 }

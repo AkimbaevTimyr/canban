@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import AddProductModal from './AddProductModal';
-import Item from './Item';
+import AddProductModal from '../AddProductModal/AddProductModal';
+import Item from '../Item/Item';
 
 function Products() {
 
