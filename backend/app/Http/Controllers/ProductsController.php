@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ProductCreateRequest;
 use App\Models\Products;
 use App\Models\UserProducts;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
@@ -21,50 +23,70 @@ class ProductsController extends Controller
 {
     public function all(Request $request)
     {
-        $products = Products::getUserProducts($request->category_id);
-        return $products;
-    }
+        try {
+            $products = Products::getUserProducts($request->category_id);
+            return $products;
+        } catch (Exception $e) {
+            return response()->json([
+                'message' => 'Something were wrong in Products Controller',
+                'error' => $e->getMessage(),
+            ], 400);
+        }
+    } 
 
     public function lowStocks(Request $request)
     {
-        $products = Products::getLowStocks();
-        return $products;
+        try {
+            $products = Products::getLowStocks();
+            return $products;
+
+        } catch(Exception $e) {
+            return response()->json([
+                'message' => 'Something were wrong in Products Controller',
+                'error' => $e->getMessage(),
+            ], 400);
+        }
     }
 
-    public function store(Request $request)
+    public function store(ProductCreateRequest $request)
     {
         $user_id = Auth::user()->id;
 
-        Validator::make($request->all(), [
-            "name" => ['string', 'required', 'max:55'],
-            "category_id" => ['required'],
-            'buy_price' => ['required', 'decimal'],
-            'quantity' => ['required', 'integer '],
-            'threshold' => ['required', 'integer']
-        ]);
+        $request->validated();
 
-        $product = Products::create([
-            'name' => $request->name,
-            'category_id' => $request->category_id,
-            'buy_price' => $request->buy_price,
-            'quantity' => $request->quantity,
-            'threshold' => $request->threshold,
-            'user_id' => $user_id,
-        ]);
+        try{ 
+            $product = Products::createProduct($user_id, $request->all());
+    
+            UserProducts::create([
+                'user_id' => $user_id,
+                'product_id' => $product->id           
+            ]);
 
-        UserProducts::create([
-            'user_id' => $user_id,
-            'product_id' => $product->id           
-        ]);
-
-        if($product) {
             return response()->json([
-                'message' => 'Category successfully created',
+                'message' => 'Product successfully created',
             ], 200);
-        } else {
+        } catch (Exception $e) {
             return response()->json([
-                'message' => 'Something were wrong',
-            ], 500);
+                'message' => 'Something were wrong in Products Controller',
+                'error' => $e->getMessage(),
+            ], 400);
         }
+    }
+
+    public function count()
+    {
+        $count = UserProducts::getProductsCount();
+        return $count;
+    }
+
+    public function createStore(Request $request) 
+    {
+        Validator::make($request->all(), [
+            'address' => ['required', 'string']
+        ]);
+
+        $address = '';
+
+        return $address;
     }
 }

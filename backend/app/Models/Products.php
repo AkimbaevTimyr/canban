@@ -24,13 +24,25 @@ class Products extends Model
         "updated_at"
     ];
 
+    public static function createProduct($user_id, $data)
+    {
+        return self::create([
+            'name' => $data['name'],
+            'category_id' => $data['category_id'],
+            'buy_price' => $data['buy_price'],
+            'quantity' => $data['quantity'],
+            'threshold' => $data['threshold'],
+            'user_id' => $user_id,
+        ]);
+    }
+
     public static function getUserProducts($id)
     {
         $user_id = Auth::user()->id;
 
         return self::join('user_products', 'user_products.product_id', '=', 'products.id')
                     ->where('user_products.user_id', '=', $user_id)
-                    ->where('products.category_id', '=', $id)
+                    // ->where('products.category_id', '=', $id)
                     ->select('products.*')
                     ->paginate();
     }
@@ -46,4 +58,16 @@ class Products extends Model
                                 )   
                         ->get();
     }
+
+    public static function decreaseQuantity($quantity, $user_id, $name) 
+    {
+        $product = Products::join('user_products', 'user_products.product_id', '=', 'products.id')
+                                ->where('user_products.user_id', '=', $user_id)
+                                ->where('products.name', 'like', $name)
+                                ->select('products.*')
+                                ->first();
+        $product->quantity -= $quantity;
+        $product->save();
+    }
+
 }

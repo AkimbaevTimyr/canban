@@ -16,6 +16,13 @@ class UserCategories extends Model
         "category_id"
     ];
 
+    public static function createUserCategory($cat_id, $user_id)
+    {
+        return self::create([
+            'category_id' => $cat_id,
+            'user_id' => $user_id
+        ]);
+    }
     
 }
 

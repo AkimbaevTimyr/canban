@@ -19,7 +19,20 @@ class Categories extends Model
         "updated_at"
     ];
 
-    public static function getUserCategories(): array
+    public static function createCategory($name)
+    {
+        $user_id = Auth::user()->id;
+        $cat = self::where(['category_name' => $name])->first();
+
+        if($cat){
+            UserCategories::createUserCategory($cat->id, $user_id);
+        } else {
+            $category = self::create(['category_name' => $name]);
+            UserCategories::createUserCategory($category->id, $user_id);
+        }
+    }
+
+    public static function getUserCategories()
     {
         $user_id = Auth::user()->id;
 

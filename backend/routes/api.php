@@ -3,9 +3,10 @@
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\CategoriesController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PdfController;
 use App\Http\Controllers\ProductsController;
-
+use App\Http\Controllers\SalesController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -38,6 +39,11 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/product-create', [ProductsController::class, 'store']);
     Route::get('/products-low-stocks', [ProductsController::class, 'lowStocks']);
     Route::get('/products-count', [ProductsController::class, 'count']);
+
+    Route::post('/order-create', [OrderController::class, 'store']);
+    
+    Route::get('/sales-count', [SalesController::class, 'salesCount']);
+
 });
 
 Route::get('/inventory-products-download', [PdfController::class, 'inventoryProductsDownload']);
