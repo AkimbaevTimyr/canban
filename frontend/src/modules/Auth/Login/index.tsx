@@ -3,9 +3,7 @@ import logo from '../../../assets/images/Logo.svg';
 import main from '../../../assets/images/LogoMain.svg';
 import google from '../../../assets/images/Google.svg';
 import { useState } from 'react';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { realpathSync } from 'fs';
 import api from '../../../app/api/api';
 
 function Login() {
@@ -13,17 +11,18 @@ function Login() {
     const [password, setPassword] = useState<string>('');
     let navigate = useNavigate();
 
-
     const handleSumbit = async (e: any) => {
         e.preventDefault();
         try{
-            // const csrf = await api.get('/sanctum/csrf-cookie')
-            const response = await api.post('/api/login', {
+            api.post('/api/login', {
                 email,
                 password
-            });
-            console.log(response.data);
-            navigate('/');
+            }).then((resp) => {
+                navigate('/');
+            }).catch((error) => {
+                console.log(error)
+            })
+            
         } catch (error: any) {
             const responseData = error.response ? error.response.data : null;
             const errorMessage = responseData ? responseData.message : 'Something went wrong';

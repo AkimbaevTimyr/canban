@@ -3,23 +3,24 @@ import logo from '../../../assets/images/Logo.svg';
 import main from '../../../assets/images/LogoMain.svg';
 import google from '../../../assets/images/Google.svg';
 import { useState } from 'react';
-import axios from 'axios';
-import { redirect } from 'react-router-dom';
-import { error } from 'console';
+import { redirect, useNavigate, useNavigation } from 'react-router-dom';
+import api from '../../../app/api/api';
 
 function SignUp() {
     const [name, setName] = useState<string>('');
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
 
+    let navigate = useNavigate();
+
     const handleSumbit = (e: any) => {
         e.preventDefault();
-        axios.post('http://batr.com.kz:8090/api/signup', {
+        api.post('/api/signup', {
             name,
             email,
             password
         }).then((resp) => {
-            return redirect('/');
+            navigate('/login')
         }).catch((error) => {
             console.log(error)
         })
@@ -34,7 +35,6 @@ function SignUp() {
                 <div className='login_right_header'>
                     <img className='login_right_header_img' src={logo} width="60px" height="60px" />
                     <h1 className='login_right_header_title'>Create an account</h1>
-                    {/* <p className='login_right_header_desc'>Start your 30-day free trial.</p> */}
                 </div>
                 <div className='login_right_form'>
                     <form onSubmit={handleSumbit}>
