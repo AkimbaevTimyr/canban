@@ -10,7 +10,9 @@ class PdfController extends Controller
 {
     public function inventoryProductsDownload()
     {
-        $user_id = Auth::user()->id;
+        // $user_id = Auth::user()->id;
+        //временная зазлушка
+        $user_id = 1;
 
         $data = Products::join('user_products', 'user_products.product_id', '=', 'products.id')
                     ->where('user_products.user_id', '=', $user_id)
@@ -19,6 +21,9 @@ class PdfController extends Controller
 
         $pdf = Pdf::loadView('inventory.products', ['products' => $data]);
 
-        return $pdf->download('products.pdf');
+        return $pdf->download('products.pdf', [
+            'Content-Type' => 'application/pdf',
+            'Content-Disposition' => 'attachment; filename=products.pdf',
+        ]);
     }
 }

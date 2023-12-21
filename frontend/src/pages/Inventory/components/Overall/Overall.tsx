@@ -1,6 +1,42 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
+import api from '../../../../app/api/api'
 
 function Overall() {
+    const [categories, setCategories] = useState<any>();
+    const [count, setCount] = useState<number>();
+    const [productsCount, setProductsCount] = useState();
+    const [lowStock, setLowStock] = useState();
+    const [notInStock, setNotInStock] = useState();
+
+    useEffect(() => {
+        api.get('/api/categories-all')
+        .then((resp) => {
+            setCount(resp.data.count)
+            setCategories(resp.data.data)
+        })
+        .catch((error) => {
+            console.log(error)
+        }) 
+
+        api.get('/api/products-count')
+        .then((resp) => {
+            setProductsCount(resp.data.count)
+        })
+        .catch((error) => {
+            console.log(error)
+        })
+
+        api.get('/api/products-low-stocks')
+        .then((resp) => {
+            setLowStock(resp.data.low_stock)
+            setNotInStock(resp.data.not_in_stock)
+        })
+        .catch((error) => {
+            console.log(error)
+        })
+
+    }, [])
+
     return (
         <div className="inventory_overall">
             <div className="inventory_overall_title">
@@ -14,7 +50,7 @@ function Overall() {
                                 Categories
                             </div>
                             <div className='inventory_overall_info_list_item_count'>
-                                14
+                                {count}
                             </div>
                             <div className='inventory_overall_info_list_item_date'>
                                 Last 7 days
@@ -27,7 +63,7 @@ function Overall() {
                             <div className='flex'>
                                 <div>
                                     <div className='inventory_overall_info_list_item_count'>
-                                        14
+                                        {productsCount}
                                     </div>
                                     <div className='inventory_overall_info_list_item_date'>
                                         Last 7 days
@@ -35,7 +71,7 @@ function Overall() {
                                 </div>
                                 <div>
                                     <div className='inventory_overall_info_list_item_count'>
-                                        ₹25000
+                                        не работает
                                     </div>
                                     <div className='inventory_overall_info_list_item_date'>
                                         Revenue
@@ -58,7 +94,7 @@ function Overall() {
                                 </div>
                                 <div>
                                     <div className='inventory_overall_info_list_item_count'>
-                                        ₹2500
+                                        не работает
                                     </div>
                                     <div className='inventory_overall_info_list_item_date'>
                                         Cost
@@ -73,7 +109,7 @@ function Overall() {
                             <div className='flex'>
                                 <div>
                                     <div className='inventory_overall_info_list_item_count'>
-                                        12
+                                        {lowStock}
                                     </div>
                                     <div className='inventory_overall_info_list_item_date'>
                                         Last 7 days
@@ -81,7 +117,7 @@ function Overall() {
                                 </div>
                                 <div>
                                     <div className='inventory_overall_info_list_item_count'>
-                                        2
+                                        {notInStock}
                                     </div>
                                     <div className='inventory_overall_info_list_item_date'>
                                         Not in stock

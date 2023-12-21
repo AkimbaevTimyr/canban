@@ -5,11 +5,11 @@ import inventory from '../../assets/images/navbar/Inventory.svg';
 import logout from '../../assets/images/navbar/LogOut.svg';
 import managestore from '../../assets/images/navbar/ManageStore.svg';
 import order from '../../assets/images/navbar/Order.svg';
-import report from '../../assets/images/navbar/Report.svg';
 import setting from '../../assets/images/navbar/Settings.svg';
-import suppliers from '../../assets/images/navbar/Suppliers.svg';
 
 import './navbar.scss';
+import api from '../../app/api/api';
+import { useNavigate } from 'react-router-dom';
 
 interface link {
     name: string,
@@ -21,11 +21,17 @@ function Navbar() {
     const links: link[] =  [
         {'name': 'Dashboard', 'url': '/dashboard', 'img': home },
         {'name': 'Inventory', 'url': '/inventory',  'img': inventory },
-        {'name': 'Reports', 'url': '/reports',  'img': report },
-        {'name': 'Suppliers', 'url': '/suppliers',  'img': suppliers },
         {'name': 'Orders', 'url': '/orders',  'img': order },
-        {'name': 'Manage Store', 'url': '/manage-store',  'img': managestore },
     ]
+    const navigate = useNavigate();
+
+    const handleLogOut = () => {
+        api.post('/api/logout').then(() => {
+            navigate('/login');
+        }).catch((error) => {
+            alert('Произошла ошибка')
+        })
+    }
 
   return (
     <div className='navbar'>
@@ -56,7 +62,7 @@ function Navbar() {
                 <li className='navbar_links_list_item'>
                     <a>
                         <img className='navbar_links_list_item_img' src={logout} />
-                        <button className='navbar_bottom_logout'>
+                        <button onClick={handleLogOut} className='navbar_bottom_logout'>
                             Log Out
                         </button>
                     </a>

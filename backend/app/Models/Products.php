@@ -56,7 +56,7 @@ class Products extends Model
                                     DB::raw('count(case when products.quantity <= 10 then 1 end) as low_stock'),
                                     DB::raw('count(case when products.quantity = 0 then 1 end) as not_in_stock',)
                                 )   
-                        ->get();
+                        ->get()[0];
     }
 
     public static function decreaseQuantity($quantity, $user_id, $name) 

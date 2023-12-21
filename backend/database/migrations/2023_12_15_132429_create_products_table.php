@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->integer('category_id');
-            $table->decimal('buy_price');
+            $table->decimal('buy_price'); //20.2
             $table->integer('quantity');
             $table->integer('threshold');
             $table->timestamps();

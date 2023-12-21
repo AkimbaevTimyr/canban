@@ -25,8 +25,8 @@ class UserProducts extends Model
 
         return self::where('user_id', '=', $user_id)
                     ->select(
-                                DB::raw('count(product_id) as producs_count')
+                                "*"
                             )
-                    ->get();
+                        ->count();
     }
 }

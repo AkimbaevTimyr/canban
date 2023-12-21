@@ -38,8 +38,10 @@ class ProductsController extends Controller
     {
         try {
             $products = Products::getLowStocks();
-            return $products;
-
+            return response()->json([
+                'low_stock' => $products->low_stock,
+                'not_in_stock' => $products->not_in_stock
+            ], 200);
         } catch(Exception $e) {
             return response()->json([
                 'message' => 'Something were wrong in Products Controller',
@@ -76,7 +78,9 @@ class ProductsController extends Controller
     public function count()
     {
         $count = UserProducts::getProductsCount();
-        return $count;
+        return response()->json([
+            'count' => $count
+        ], 200);
     }
 
     public function createStore(Request $request) 

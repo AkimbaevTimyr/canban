@@ -11,6 +11,8 @@
 }
 
 .modal_label {
+    display: flex;
+    align-items: center;
     color: var(--grey-grey-700, #48505E);
 
     /* Body 1/Medium */
@@ -22,8 +24,35 @@
     font-family: "Open Sans", sans-serif;
 }
 
-.add_product_form {
+.modal_input {
+    padding: 10px 14px;
+    border-radius: 8px;
+    border: 1px solid var(--Gray-300, #D0D5DD);
+    background: var(--White, #FFF);
+    box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
 
-    
-        
+    color: var(--Grey-grey-400, #858D9D);
+    font-family: Inter;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px; /* 150% */
 }
+
+.modal_input:focus{
+    outline: none;
+}
+
+.label_input {
+    max-width: 195.6px;
+    width: 100%;
+}
+
+.add_product_form {
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+

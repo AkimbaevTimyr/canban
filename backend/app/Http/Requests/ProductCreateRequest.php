@@ -16,9 +16,10 @@ class ProductCreateRequest extends FormRequest
         return [
             "name" => ['string', 'required', 'max:55'],
             "category_id" => ['required'],
-            'buy_price' => ['numeric','required', 'regex:/^\d+(\.\d{1,2})?$/'],
+            'buy_price' => ['required'],
             'quantity' => ['required', 'integer '],
-            'threshold' => ['required', 'integer']
+            'threshold' => ['required', 'integer'],
+            'expiry_date' => ['required'],
         ];
     }
 }
