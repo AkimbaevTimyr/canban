@@ -1,6 +1,4 @@
 import React, {FC} from 'react'
-import Modal from 'react-modal';
-
 
 interface ItemProps {
     product_name: string;
@@ -28,12 +26,3 @@ const Item: FC<ItemProps> = ({product_name,bying_price, quantity, threshold_valu
 }
 
 export default Item;
-
-{/* <tr className='top_stock_info_table_tr'>
-    <th className='top_stock_info_table_th'>Maggi</th>
-    <th className='top_stock_info_table_th'>₹430</th>
-    <th className='top_stock_info_table_th'>43 Packets</th>
-    <th className='top_stock_info_table_th'>12 Packets</th>
-    <th className='top_stock_info_table_th'>11/12/22</th>
-    <th className='top_stock_info_table_th' style={{'color': 'red'}}>In-stock</th>
-</tr> */}

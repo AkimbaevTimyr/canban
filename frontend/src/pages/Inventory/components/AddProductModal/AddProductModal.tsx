@@ -4,6 +4,7 @@ import '../modal.scss';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import api from '../../../../app/api/api';
+import { Category } from '../../types/Category';
 
 
 interface AddProductModalProps {
@@ -11,7 +12,6 @@ interface AddProductModalProps {
     modalIsOpen: boolean;
 }
   
-
 const AddProductModal: FC<AddProductModalProps> = ({toggleModal, modalIsOpen}) => {
 
     const [name, setName] = useState();
@@ -21,8 +21,8 @@ const AddProductModal: FC<AddProductModalProps> = ({toggleModal, modalIsOpen}) =
     const [date, setDate] = useState();
     const [threshold, setThreshold] = useState();    
 
-    const [categoriesList, setCategoriesList] = useState<any>();
-    
+
+    const [categoriesList, setCategoriesList] = useState<Category[]>([]);
     
     const customStyles = {
         content: {
@@ -43,6 +43,7 @@ const AddProductModal: FC<AddProductModalProps> = ({toggleModal, modalIsOpen}) =
         api.get('/api/categories-all')
         .then((resp) => {
             setCategoriesList(resp.data.data)
+
         })
         .catch((error) => {
             console.log(error)
