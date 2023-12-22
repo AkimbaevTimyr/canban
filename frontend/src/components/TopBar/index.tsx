@@ -3,11 +3,17 @@ import './topBar.scss';
 import notification from '../../assets/images/Notification.svg';
 import avatar from '../../assets/images/Avatar.svg';
 
+type link = {
+    name: string;
+    url: string;
+}
+
+
 function TopBar() {
     const [nav, setNav] = useState<boolean>(false);
     const dropdownRef = useRef<any>();
 
-    const links: any[] =  [
+    const links: link[] =  [
         {'name': 'Dashboard', 'url': '/dashboard', },
         {'name': 'Inventory', 'url': '/inventory',   },
         {'name': 'Reports', 'url': '/reports',  },
@@ -44,7 +50,7 @@ function TopBar() {
                     <div  className='topbar_dropdown'>
                         <ul className='topbar_dropdown_list'>
                             {
-                                links.map((link) => (
+                                links.map((link: link) => (
                                     <li key={link.url} className='topbar_dropdown_list_item'>
                                         <a href={link.url}>
                                             {link.name}

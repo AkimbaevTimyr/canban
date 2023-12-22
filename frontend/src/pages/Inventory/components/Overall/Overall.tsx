@@ -8,6 +8,9 @@ function Overall() {
     const [lowStock, setLowStock] = useState();
     const [notInStock, setNotInStock] = useState();
 
+    const [topSelling, setTopSelling] = useState();
+    const [topPrice, setTopPrice] = useState();
+
     useEffect(() => {
         api.get('/api/categories-all')
         .then((resp) => {
@@ -30,6 +33,15 @@ function Overall() {
         .then((resp) => {
             setLowStock(resp.data.low_stock)
             setNotInStock(resp.data.not_in_stock)
+        })
+        .catch((error) => {
+            console.log(error)
+        })
+
+        api.get('/api/sales-top')
+        .then((resp) => {
+            setTopSelling(resp.data.products_count)
+            setTopPrice(resp.data.total_price)
         })
         .catch((error) => {
             console.log(error)
@@ -86,7 +98,7 @@ function Overall() {
                             <div className='flex'>
                                 <div>
                                     <div className='inventory_overall_info_list_item_count'>
-                                        5
+                                        {topSelling}
                                     </div>
                                     <div className='inventory_overall_info_list_item_date'>
                                         Last 7 days
@@ -94,7 +106,7 @@ function Overall() {
                                 </div>
                                 <div>
                                     <div className='inventory_overall_info_list_item_count'>
-                                        не работает
+                                        {topPrice}
                                     </div>
                                     <div className='inventory_overall_info_list_item_date'>
                                         Cost

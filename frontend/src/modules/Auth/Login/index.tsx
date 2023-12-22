@@ -13,7 +13,6 @@ function Login() {
     localStorage.setItem('token', '')
     localStorage.setItem('isAuth', 'false');
 
-
     const handleSumbit = async (e: any) => {
         e.preventDefault();
         try{
@@ -23,9 +22,10 @@ function Login() {
             }).then((resp) => {
                 localStorage.setItem('token', resp.data.token)
                 localStorage.setItem('isAuth', 'true');
-                navigate('/');
+                navigate('/dashboard');
             }).catch((error) => {
                 console.log(error)
+                alert(error.response.data.message)
             })
             
         } catch (error: any) {
@@ -67,6 +67,7 @@ function Login() {
                                 id='password' 
                                 className='form_input' 
                                 placeholder='Enter your password' 
+                                required
                             />
                             <button className='form_button' type='submit'>Sign in</button>
                         </div>

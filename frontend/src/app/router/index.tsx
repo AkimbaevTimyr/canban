@@ -5,6 +5,7 @@ import Dashobard from "../../pages/Dashboard";
 import RouteListenerLayout from "../../components/RouteListenerLayout";
 import Inventory from "../../pages/Inventory/Index";
 
+
 const router = createBrowserRouter([
     {
         path: '/',

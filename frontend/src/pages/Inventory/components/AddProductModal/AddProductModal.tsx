@@ -21,7 +21,6 @@ const AddProductModal: FC<AddProductModalProps> = ({toggleModal, modalIsOpen}) =
     const [date, setDate] = useState();
     const [threshold, setThreshold] = useState();    
 
-
     const [categoriesList, setCategoriesList] = useState<Category[]>([]);
     
     const customStyles = {

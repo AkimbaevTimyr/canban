@@ -11,6 +11,8 @@ function SignUp() {
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
 
+    const [error, setError] = useState();
+
     let navigate = useNavigate();
 
     const handleSumbit = (e: any) => {
@@ -20,9 +22,21 @@ function SignUp() {
             email,
             password
         }).then((resp) => {
+            alert('Вы успешно зарегистрировались. Теперь вы будете перенаправлены на станицу авторизации')
             navigate('/login')
         }).catch((error) => {
             console.log(error)
+
+            if (error.response && error.response.data && error.response.data.errors) {
+
+                const errorField = Object.keys(error.response.data.errors)[0];
+                const fieldError = Object.keys(error.response.data.errors[errorField][0]);
+                const errorMessage: any[] = error.response.data.errors[errorField][0][fieldError[0]];
+
+                alert(`Ошибка при регистрации: ${errorMessage[0]}`);
+            } else {
+                alert('Произошла ошибка при регистрации. Пожалуйста, повторите попытку.');
+            }
         })
     }
   return (

@@ -3,7 +3,6 @@ import logo from '../../assets/images/Logo.svg';
 import home from '../../assets/images/navbar/Home.svg';
 import inventory from '../../assets/images/navbar/Inventory.svg';
 import logout from '../../assets/images/navbar/LogOut.svg';
-import managestore from '../../assets/images/navbar/ManageStore.svg';
 import order from '../../assets/images/navbar/Order.svg';
 import setting from '../../assets/images/navbar/Settings.svg';
 
@@ -27,6 +26,8 @@ function Navbar() {
 
     const handleLogOut = () => {
         api.post('/api/logout').then(() => {
+            localStorage.setItem('isAuth', 'false');
+            localStorage.setItem('token', '');
             navigate('/login');
         }).catch((error) => {
             alert('Произошла ошибка')

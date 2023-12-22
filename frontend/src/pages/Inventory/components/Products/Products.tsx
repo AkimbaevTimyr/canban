@@ -89,19 +89,21 @@ function Products() {
             </div>
             <div className="inventory_products_body">
                 <table className='inventory_products_body_table'>
-                    <tr className='top_stock_info_table_tr'>
-                        <th className='top_stock_info_table_th'>Products</th>
-                        <th className='top_stock_info_table_th'>Buying Price</th>
-                        <th className='top_stock_info_table_th'>Quantity</th>
-                        <th className='top_stock_info_table_th'>Threshold Value</th>
-                        <th className='top_stock_info_table_th'>Expiry Date</th>
-                        <th className='top_stock_info_table_th'>Availability</th>
-                    </tr>
-                    {
-                        products.map((product: Product) => (
-                            <Item key={product.id} product_name={product.name} bying_price={product.buy_price} quantity={product.quantity} threshold_value={product.threshold} expiry_date={product.expiry_date} availability={product.availability}/>
-                        ))
-                    }
+                    <tbody>
+                        <tr className='top_stock_info_table_tr'>
+                            <th className='top_stock_info_table_th'>Products</th>
+                            <th className='top_stock_info_table_th'>Buying Price</th>
+                            <th className='top_stock_info_table_th'>Quantity</th>
+                            <th className='top_stock_info_table_th'>Threshold Value</th>
+                            <th className='top_stock_info_table_th'>Expiry Date</th>
+                            <th className='top_stock_info_table_th'>Availability</th>
+                        </tr>
+                        {
+                            products.map((product: Product) => (
+                                <Item key={product.id} product_name={product.name} bying_price={product.buy_price} quantity={product.quantity} threshold_value={product.threshold} expiry_date={product.expiry_date} availability={product.availability}/>
+                            ))
+                        }
+                    </tbody>
                 </table>
                 <Pagination links={links} changePage={(page : string) => handlePage(page)} />
             </div>
