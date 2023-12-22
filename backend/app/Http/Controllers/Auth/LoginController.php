@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -33,12 +34,13 @@ class LoginController extends Controller
             ]);
         }
 
-        if(Auth::attempt(['email'=> $request->email, 'password' => $request->password])) {
-            $token = $request->user()->createToken('access_token', ['user:all']);
+        if(Auth::once(['email'=> $request->email, 'password' => $request->password])) {
+            $user = Auth::user();
+            $token = $request->user()->createToken('access_token', expiresAt:now()->addDay())->plainTextToken;
             $request->session()->regenerate();
 
             return response()->json([
-                'token' => $token->plainTextToken
+                'token' => $token,
             ], 200);
         } 
 
@@ -47,18 +49,24 @@ class LoginController extends Controller
         ])->status(401);
     }
 
-    public function logout(Request $request) {
-        $user = auth()->user();
+    public function logout(Request $request)
+    {
+        try {
+            $deletedTokens = $request->user()->tokens()->delete();
 
-        $user->tokens()->delete();
-
-        Auth::logout();
-
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
-       
-        return response()->json([            
-            "message" => "Logged out successfully"        
-        ], 200);    
+            if ($deletedTokens > 0) {
+                return response()->json([
+                    "message" => "Logged out successfully"
+                ], 200);
+            } else {
+                return response()->json([
+                    "message" => "No tokens were found to delete"
+                ], 404);
+            }
+        } catch (Exception $e) {
+            return response()->json([            
+                "message" => "Something went wrong when you tried to logout"
+            ], 500);    
+        }
     }
 }

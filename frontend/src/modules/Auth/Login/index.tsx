@@ -10,6 +10,9 @@ function Login() {
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     let navigate = useNavigate();
+    localStorage.setItem('token', '')
+    localStorage.setItem('isAuth', 'false');
+
 
     const handleSumbit = async (e: any) => {
         e.preventDefault();
@@ -18,6 +21,8 @@ function Login() {
                 email,
                 password
             }).then((resp) => {
+                localStorage.setItem('token', resp.data.token)
+                localStorage.setItem('isAuth', 'true');
                 navigate('/');
             }).catch((error) => {
                 console.log(error)
