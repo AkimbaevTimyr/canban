@@ -21,10 +21,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-
 
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/category-create', [CategoriesController::class, 'store']);
@@ -37,18 +38,14 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/products-count', [ProductsController::class, 'count']);
 
     Route::post('/order-create', [OrderController::class, 'store']);
-    
-    Route::get('/sales-count', [SalesController::class, 'salesCount']);
+    Route::get('/inventory-products-download', [PdfController::class, 'inventoryProductsDownload']);
 
+    Route::get('/sales-count', [SalesController::class, 'salesCount']);
+    Route::get('/sales-top', [SalesController::class, 'salesTop']);
 });
 
-Route::get('/inventory-products-download', [PdfController::class, 'inventoryProductsDownload']);
 
 Route::post('/login', [LoginController::class, 'authenticate'])->name('login');
-Route::post('/logout', [LoginController::class, 'logout']);
+Route::post('/logout', [LoginController::class, 'logout'])->middleware('auth:sanctum');
 Route::post('/signup', [RegisteredUserController::class, 'store']);
 
-
-Route::get('/get-csrf-token', function () {
-    return response()->json(['csrftoken' => csrf_token()]);
-});

@@ -24,9 +24,7 @@ class UserProducts extends Model
         $user_id = Auth::user()->id;
 
         return self::where('user_id', '=', $user_id)
-                    ->select(
-                                "*"
-                            )
-                        ->count();
+                    ->select("*")
+                    ->count();
     }
 }

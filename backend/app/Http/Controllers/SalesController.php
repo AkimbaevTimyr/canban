@@ -29,4 +29,28 @@ class SalesController extends Controller
         }
     }
 
+    public function salesTop(Request $request)
+    {
+        $user_id = Auth::user()->id;
+
+        try{
+            $products = Order::getSalesTop($user_id);
+            $count = Order::getSalesTopPrice($user_id);
+
+            return response()->json([
+                'data' => $products,
+                'products_count' => count($products),
+                'total_price' => $count
+            ]);
+
+        } catch(Exception $e) {
+            return response()->json([
+                'message' => 'Something where wrong',
+                'error' => $e->getMessage(),
+            ]);
+        }
+    }
+
+    
+
 }
